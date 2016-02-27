@@ -4,9 +4,16 @@ import re
 import pandas as pd
 
 def clean_data(df):
+    df['GP'] = df['GP'].map(lambda x: float(x))
     df['OR'] = df['OR'].map(lambda x: re.sub(',','',x))
     df['OP'] = df['OP'].map(lambda x: re.sub(',','',x))
+    df['OP'] = df['OP'].map(lambda x: float(x))
     df['GR'] = df['GR'].map(lambda x: re.sub(',','',x))
+    df['GR'] = df['GR'].map(lambda x: re.sub('-','0',x))
+    df['GR'] = df['GR'].map(lambda x: float(x))
+    df['PB'] = df['PB'].map(lambda x: float(x))
+    df['TC'] = df['TC'].map(lambda x: float(x))
+    df['TM'] = df['TM'].map(lambda x: float(x))
     df['TV'] = df['TV'].map(lambda x : x[1:])
     df['TV'] = df['TV'].map(lambda x : x.rstrip('m'))
     df['TV'] = df['TV'].map(lambda x : float(x))
