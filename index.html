@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Tim's In Wales Fantasy League">
+    <meta name="author" content="Benjamin Keen">
+
+    <title>Ben Alex Keen - Fantasy Football Stats</title>
+
+    <!-- Bootstrap Core CSS - Uses Bootswatch Flatly Theme: http://bootswatch.com/flatly/ -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/freelancer.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+        <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+    <script src="js/csi.js"></script>
+</head>
+
+<body id="page-top" class="index">
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#page-top">Fantasy League Stats</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="hidden">
+                        <a href="#page-top"></a>
+                    </li>
+                    <li class="page-scroll">
+                        <a href="#points">Points</a>
+                    </li>
+                    <li class="page-scroll">
+                        <a href="#bench">Bench Points</a>
+                    </li>
+                    <li class="page-scroll">
+                        <a href="#values">Team Values</a>
+                    </li>
+                    <li class="page-scroll">
+                        <a href="#transfers">Transfers</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="intro-text">
+                        <span class="name">Fantasy League Stats</span>
+                        <hr class="star-light">
+                        <span class="skills">I've been learning some Python for work and practicing data munging, manipulation and analysis. As I build up these skills I'll try and add things to this page. At the moment the statistics here are static and updated manually, I'll try and find a way in the future to have them auto-update.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Points Section -->
+    <section id="points">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2>Points</h2>
+                    <hr class="star-primary">
+                </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-12 text-center">
+                    <p>Points. Let's start with overall points. This graph shows where everyone was in the league after each gameweek. All these figures are scrollable and you can turn players off/on by cliking on their names. Hover over a gameweek for more detailed info</p>
+                    <iframe width="900" height="600" frameborder="0" scrolling="no" src="https://plot.ly/~benalexkeen/58.embed"></iframe>
+                    <p><br>But what if you wanted to know how well you did in a particular gameweek compared to everyone else? This is the total points per gameweek:</p>
+                    <iframe width="900" height="600" frameborder="0" scrolling="no" src="https://plot.ly/~benalexkeen/78.embed"></iframe>
+                    <p><br>And where everyone ranked each week:</p>
+                    <iframe width="900" height="600" frameborder="0" scrolling="no" src="https://plot.ly/~benalexkeen/74.embed"></iframe>
+                    <p><br>These are the top 10 single point scores in a gameweek...Obviously most come from the week everyone had Aguero as captain for the 5-goal week (Gameweek 8)</p>
+                    <iframe width=400px height=400px src="python/GP_top10.html"></iframe>
+                    <p>(I know this looks terrible, I'll update it using PHP when I have time.)</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bench Points Section -->
+    <section class="success" id="bench">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2>Bench Points</h2>
+                    <hr class="star-light">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <p>It's always hilarious when someone leaves lots of points on their bench, here's the top 10 points left on the bench:</p>
+                    <iframe height=400px src="python/PB_top10.html"></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Values Section -->
+    <section id="values">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2>Team Values</h2>
+                    <hr class="star-primary">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2">
+                    <p>This graph looks at how people's team values have changed over the year so far.</p>
+                    <iframe width="900" height="600" frameborder="0" scrolling="no" src="https://plot.ly/~benalexkeen/83.embed"></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Bench Points Section -->
+    <section class="success" id="transfers">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2>Transfers Made</h2>
+                    <hr class="star-light">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <p>Some of you (Angelo) love a transfer, here are how many transfers people have made so far:</p>
+                    <iframe width="900" height="600" frameborder="0" scrolling="no" src="https://plot.ly/~benalexkeen/86.embed"></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="text-center">
+        
+        <div class="footer-below">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        Copyright &copy; Ben Alex Keen 2015
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scroll to Top Button (Only visible on small and extra-small screen sizes) -->
+    <div class="scroll-top page-scroll visible-xs visible-sm">
+        <a class="btn btn-primary" href="#page-top">
+            <i class="fa fa-chevron-up"></i>
+        </a>
+    </div>
+
+
+
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+    <script src="js/classie.js"></script>
+    <script src="js/cbpAnimatedHeader.js"></script>
+
+    <!-- Contact Form JavaScript -->
+    <script src="js/jqBootstrapValidation.js"></script>
+    <script src="js/contact_me.js"></script>
+
+    <!-- Custom Theme JavaScript -->
+    <script src="js/freelancer.js"></script>
+
+</body>
+
+</html>
