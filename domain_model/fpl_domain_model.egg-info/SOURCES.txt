@@ -1,0 +1,4 @@
+fpl_domain_model.egg-info/PKG-INFO
+fpl_domain_model.egg-info/SOURCES.txt
+fpl_domain_model.egg-info/dependency_links.txt
+fpl_domain_model.egg-info/top_level.txt
