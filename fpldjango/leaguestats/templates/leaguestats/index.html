@@ -6,7 +6,7 @@
 <head>
     {% load staticfiles %}
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
-    <title>Title Goes Here</title>
+    <title>Fantasy Football League Stats</title>
     <link rel="stylesheet" type="text/css" href="{% static 'bootstrap/css/bootstrap.css' %}" />
     <link rel="stylesheet" type="text/css" href="{% static 'bootstrap/css/bootstrap-theme.css' %}"/>
     <link rel="stylesheet" type="text/css" href="{% static 'leaguestats/style.css' %}"/>
@@ -27,6 +27,7 @@
           </div>
 
           <div class="inner cover">
+            <img src="{% static 'images/Premier_League.png' %}" height="150px">
             <h1 class="cover-heading">Enter Your League Number Below</h1>
             <form action='/leaguestats/' method='post'>{% csrf_token %}
                 {{ form.as_p }}
@@ -36,7 +37,7 @@
 
           <div class="mastfoot">
             <div class="inner">
-                <p><a href="#">Where's my league number?</a></p>
+                <p><a href="{{league_num_url}}">Where's my league number?</a></p>
               <p>Website by  <a href="http://www.benalexkeen.com">Ben Alex Keen</a></p>
             </div>
           </div>

@@ -23,8 +23,9 @@ def get(url):
 
 
 def index(request):
+    league_num_url = request.build_absolute_uri(reverse('find_league_number'))
     if request.method == 'GET':
-        form = PostForm()
+        form = PostForm()        
     else:
         # A POST request: Handle Form Upload
         form = PostForm(request.POST) # Bind data from request.POST into a PostForm
@@ -37,6 +38,7 @@ def index(request):
 
     return render(request, 'leaguestats/index.html', {
         'form': form,
+        'league_num_url': league_num_url,
     })
 
 def results(request, league_id):
@@ -45,3 +47,6 @@ def results(request, league_id):
     'data': res.content
     }
     return render(request, 'leaguestats/results.html', context)
+
+def find_league_number(request):
+    return render(request, 'leaguestats/find_league_number.html')
