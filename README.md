@@ -4,6 +4,7 @@
 -----
 ### Requirements
 This Django project runs using Python 2.7.11
+
 Install the requirements as follows:
 ```shell
 cd <path to fantasy_football_league_stats directory>/fpldjango
