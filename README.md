@@ -9,12 +9,12 @@ Install the requirements as follows:
 cd <path to fantasy_football_league_stats directory>/fpldjango
 pip install -r requirements.txt
 ```
-To install PostgreSQL:
+To install PostgreSQL:  
 *Mac via Brew:*
 ```shell
 brew install postgres
-```
-*Linux via apt-get:(
+```  
+*Linux via apt-get:  
 ```shell
 sudo apt-get install postgresql postgresql-contrib
 ```
