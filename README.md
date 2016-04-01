@@ -35,6 +35,6 @@ postgres -D /usr/local/var/postgres
 ```shell
 sudo -i -u postgres
 ```
-The site can be viewed in your browser at http://localhost:8000
+The site can be viewed in your browser at http://localhost:8000/leaguestats
 
 Any changes made locally will cause the site to rebuild automagically.

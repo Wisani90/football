@@ -1,2 +1,8 @@
 requests==2.8.1
 psycopg2==2.6.1
+django==1.9.4
+djangorestframework==3.3.3
+pyjade==4.0.0
+
+-r ../domain_model/requirements.txt
+-e ../domain_model
