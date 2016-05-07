@@ -1,4 +1,5 @@
 import requests
+import json
 
 from django.shortcuts import render
 from django.template import loader
@@ -43,8 +44,16 @@ def index(request):
 
 def results(request, league_id):
     res = get(request.build_absolute_uri(reverse('leaguestatsview', kwargs={'league_id': league_id})))
+    data = eval(res.content)
     context = {
-    'data': res.content
+        "cumulative_transfers_made": data['cumulative_transfers_made'],
+        "gamepoints_by_week": data['gamepoints_by_week'],
+        "gamepoint_rank": data['gamepoint_rank'],
+        "gamepoint_top_10": data['gamepoint_top_10'],
+        "gamepoint_bottom_10": data['gamepoint_bottom_10'],
+        "overall_point_rank": data['overall_point_rank'],
+        "bench_points_top_10": data['bench_points_top_10'],
+        "team_value_by_week": data['team_value_by_week'],
     }
     return render(request, 'leaguestats/results.html', context)
 

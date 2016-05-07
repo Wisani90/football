@@ -6,17 +6,29 @@ def order_by_gameweek(df):
     df = df.drop('indexNumber', 1)
     return df
 
-class CreateStats():
+class CreateStats(object):
     def __init__(self, league_data):
         self.league_data = league_data
 
     def cumulative_transfers_made(self):
         ctm_df_select = self.league_data[['GW', 'TM', 'player_name']]
+        top_10 = list(ctm_df_select.groupby('player_name').sum().sort_values(
+            'TM', ascending=False).head(10).index)
+        ctm_df_select = ctm_df_select[ctm_df_select['player_name'].isin(top_10)]
         ctm_pivot = ctm_df_select.pivot(index='GW', columns='player_name', values='TM')
         ctm_pivot = order_by_gameweek(ctm_pivot)
         ctm_pivot = ctm_pivot.cumsum()
-        ctm_dicts = ctm_pivot.to_dict()
-        return ctm_dicts
+        ctm_list_of_lists = []
+        gameweek_list = ['Gameweek']
+        for gameweek in ctm_pivot.index:
+            gameweek_int = int(gameweek.split(' ')[1])
+            gameweek_list.append(gameweek_int)
+        ctm_list_of_lists.append(gameweek_list)
+        for name in ctm_pivot.columns.values.tolist():
+            name_list = [name]
+            name_list.extend(ctm_pivot[name].tolist())
+            ctm_list_of_lists.append(name_list)
+        return ctm_list_of_lists
 
     def gamepoints_by_week(self):
         gpw_df_select = self.league_data[['GW', 'GP', 'player_name']]
@@ -84,10 +96,22 @@ class CreateStats():
 
     def team_value_by_week(self):
         tv_select = self.league_data[['GW', 'TV', 'player_name']]
+        top_10 = list(tv_select.groupby('player_name').sum().sort_values(
+            'TV', ascending=False).head(10).index)
+        tv_select = tv_select[tv_select['player_name'].isin(top_10)]
         tv_pivot = tv_select.pivot(index='GW', columns='player_name', values='TV')
         tv_pivot = order_by_gameweek(tv_pivot)
-        tv_dicts = tv_pivot.to_dict()
-        return tv_dicts
+        tv_list_of_lists = []
+        gameweek_list = ['Gameweek']
+        for gameweek in tv_pivot.index:
+            gameweek_int = int(gameweek.split(' ')[1])
+            gameweek_list.append(gameweek_int)
+        tv_list_of_lists.append(gameweek_list)
+        for name in tv_pivot.columns.values.tolist():
+            name_list = [name]
+            name_list.extend(tv_pivot[name].tolist())
+            tv_list_of_lists.append(name_list)
+        return tv_list_of_lists
 
 def main():
     from domain_model.scrape_league_data import ScrapeData

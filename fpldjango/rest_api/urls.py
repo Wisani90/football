@@ -3,7 +3,7 @@ from django.conf.urls import url
 from . import views
 
 urlpatterns = [
-    url(r'^leaguestats/(?P<league_id>[0-9]+)/$',
+    url(r'^leaguestats/(?P<league_id>\d+)/$',
         views.LeagueStatsView.as_view(),
         name='leaguestatsview')
 ]

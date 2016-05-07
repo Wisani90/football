@@ -1,13 +1,110 @@
 <!DOCTYPE html>
-<html class="no-js">
+<html lang="en">
 
 <head>
-    <meta charset='UTF-8'>
-    <title>Data</title>
+    {% load staticfiles %}
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <title>Fantasy Football League Stats</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'bootstrap/css/bootstrap.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'bootstrap/css/bootstrap-theme.css' %}"/>
+    <script src={% static 'c3/c3.min.js' %}></script>
+    <script src={% static 'd3/d3.min.js' %}></script>
+    <script src={% static 'js/draw_graphs.js' %}></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'c3/c3.min.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'leaguestats/style.css' %}"/>
+    <style>
+
+    body {
+        min-height: 2000px;
+        color: #333;
+    }
+    </style>
 </head>
 
 <body>
-    <div>{{data}}</div> 
+    <nav class="navbar navbar-default">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="../">Return to enter league number</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+
+    <div class="container">
+        <div class="jumbotron">
+            <h2>
+            Transfers
+            </h2>
+            <p>Who are the top tinker men in your league?</p>
+            <div id="cum_transfers"></div>
+            <script type="text/javascript">
+            var ctm_data = {{cumulative_transfers_made|safe}}
+            drawCTMGraph(ctm_data)
+            </script>
+            
+            <h2>
+            Bench Points
+            </h2>
+            <p>Who in your league has had the most points left on their bench?</p>
+            <table class='table table-striped table-bordered'>
+                <tr><b>
+                    <td>
+                    Gameweek
+                    </td>
+                    <td>
+                    Points
+                    </td>
+                    <td>
+                    Name
+                    </td>
+                </tr></b>
+                {% for item in bench_points_top_10 %}
+                <tr>
+                    <td>
+                    {{ item.Gameweek }}
+                    </td>
+                    <td>
+                    {{ item.Points }}
+                    </td>
+                    <td>
+                    {{ item.Name }}
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+
+            <h2>
+            Team Value
+            </h2>
+            <p>Who are the people in your league racking up the value?</p>
+            <div id="team_value"></div>
+            <script type="text/javascript">
+            var tv_data = {{team_value_by_week|safe}}
+            drawTVGraph(team_value_by_week)
+            </script>
+        </div>
+    </div> <!-- /container -->
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <script src="../../dist/js/bootstrap.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+    
+
+
 </body>
 
 </html>
