@@ -53,6 +53,7 @@ def results(request, league_id):
         "gamepoint_bottom_10": data['gamepoint_bottom_10'],
         "overall_point_rank": data['overall_point_rank'],
         "bench_points_top_10": data['bench_points_top_10'],
+        "normalised_bench_points_top_10": data['normalised_bench_points_top_10'],
         "team_value_by_week": data['team_value_by_week'],
     }
     return render(request, 'leaguestats/results.html', context)

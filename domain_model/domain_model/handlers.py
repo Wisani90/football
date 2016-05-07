@@ -56,6 +56,7 @@ def get_league_stats_data_handler(league_id):
     gamepoint_rank = stats_obj.gamepoint_rank()
     overall_point_rank = stats_obj.overall_point_rank()
     bench_points_top_10 = stats_obj.bench_points_top_10()
+    normalised_bench_points_top_10 = stats_obj.normalised_bench_points_top_10()
     team_value_by_week = stats_obj.team_value_by_week()
 
     data = {
@@ -66,6 +67,7 @@ def get_league_stats_data_handler(league_id):
         "gamepoint_bottom_10": gamepoint_bottom_10,
         "overall_point_rank": overall_point_rank,
         "bench_points_top_10": bench_points_top_10,
+        "normalised_bench_points_top_10": normalised_bench_points_top_10,
         "team_value_by_week": team_value_by_week,
     }
 

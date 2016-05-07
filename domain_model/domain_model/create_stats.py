@@ -89,7 +89,25 @@ class CreateStats(object):
             top_dict = {
                 'Gameweek': top_10_bp_sort.loc[row, 'Gameweek'],
                 'Name': top_10_bp_sort.loc[row, 'Name'],
-                'Points': top_10_bp_sort.loc[row, 'Bench Points'],
+                'Points': int(top_10_bp_sort.loc[row, 'Bench Points']),
+            }
+            top_10.append(top_dict)
+        return top_10
+
+    def normalised_bench_points_top_10(self):
+        normal_bp_sort = self.league_data[['GW', 'PB', 'GP', 'player_name']]
+        normal_bp_sort['normalised'] = normal_bp_sort['PB'] / normal_bp_sort['GP']
+        normal_bp_sort = normal_bp_sort.sort_values('normalised', ascending=False)
+        normal_bp_sort = normal_bp_sort.drop('normalised', axis=1)
+        normal_bp_sort.columns = ['Gameweek', 'Bench_Points', 'Gameweek_Points', 'Name']
+        top_10_bp_sort = normal_bp_sort.head(10)
+        top_10 = []
+        for row in top_10_bp_sort.index:
+            top_dict = {
+                'Gameweek': top_10_bp_sort.loc[row, 'Gameweek'],
+                'Name': top_10_bp_sort.loc[row, 'Name'],
+                'Bench_Points': top_10_bp_sort.loc[row, 'Bench_Points'],
+                'Gameweek_Points': top_10_bp_sort.loc[row, 'Gameweek_Points'],
             }
             top_10.append(top_dict)
         return top_10

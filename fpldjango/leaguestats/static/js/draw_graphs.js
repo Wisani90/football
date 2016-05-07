@@ -15,5 +15,5 @@ function drawTVGraph(tv_data){
         x: 'Gameweek',
         columns: tv_data
       }
-  });
+    });
 };
