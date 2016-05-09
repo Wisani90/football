@@ -43,6 +43,81 @@
     <div class="container">
         <div class="jumbotron">
             <h2>
+            Rank
+            </h2>
+            <p>How have you ranked in your league over the season?</p>
+            <p style='font-size: 14px'> Hint: put your cursor over a name at the bottom to highlight that player's rank</p>
+            <div id="overall_point_rank"></div>
+            <script type="text/javascript">
+                var opr_data = {{overall_point_rank|safe}}
+                drawOPRGraph(opr_data)
+            </script>
+            <h2>
+                Points
+            </h2>
+            <p>Who were the top performers in any gameweek?</p>
+            <table class='table table-striped table-bordered'>
+                <tr><e,>
+                    <td>
+                    Gameweek
+                    </td>
+                    <td>
+                    Points
+                    </td>
+                    <td>
+                    Name
+                    </td>
+                </tr></em>
+                {% for item in gamepoint_top_10 %}
+                <tr>
+                    <td>
+                    {{ item.Gameweek }}
+                    </td>
+                    <td>
+                    {{ item.Points }}
+                    </td>
+                    <td>
+                    {{ item.Name }}
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+            <p>And the bottom performers?</p>
+            <table class='table table-striped table-bordered'>
+                <tr><b>
+                    <td>
+                    Gameweek
+                    </td>
+                    <td>
+                    Points
+                    </td>
+                    <td>
+                    Name
+                    </td>
+                </tr></b>
+                {% for item in gamepoint_bottom_10 %}
+                <tr>
+                    <td>
+                    {{ item.Gameweek }}
+                    </td>
+                    <td>
+                    {{ item.Points }}
+                    </td>
+                    <td>
+                    {{ item.Name }}
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+            <p>How did you stack up in your league week-by-week</p>
+            <p style='font-size: 14px'> Hint: put your cursor over a name at the bottom to highlight that player's points<br/>Blue area = Your league's average</p>
+            <div id="gamepoints_by_week"></div>
+            <script type="text/javascript">
+                var gpw_data = {{gamepoints_by_week|safe}}
+                drawGPWGraph(gpw_data)
+            </script>
+            
+            <h2>
             Transfers
             </h2>
             <p>Who are the top tinker men in your league?</p>

@@ -17,3 +17,44 @@ function drawTVGraph(tv_data){
       }
     });
 };
+
+function drawOPRGraph(opr_data){
+  var OPRGraph = c3.generate({
+    bindto: '#overall_point_rank',
+    data: {
+        x: 'Gameweek',
+        columns: opr_data
+      },
+    axis: {
+      y: {
+        label: { // ADD
+          text: 'Rank',
+          position: 'outer-middle'
+        },
+        inverted: true,
+      },
+    }
+    });
+};
+
+function drawGPWGraph(gpw_data){
+  var GPWGraph = c3.generate({
+    bindto: '#gamepoints_by_week',
+    data: {
+        x: 'Gameweek',
+        columns: gpw_data,
+        type: 'spline',
+        types: {
+            Average: 'area',
+        },
+      },
+    axis: {
+      y: {
+        label: { // ADD
+          text: 'Points',
+          position: 'outer-middle'
+        },
+      },
+    }
+    });
+};
