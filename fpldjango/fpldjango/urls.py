@@ -15,13 +15,11 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
-
-urlpatterns = [
-    url(r'^admin/', admin.site.urls),
-]
+from django.views.generic import RedirectView
 
 urlpatterns = [
     url(r'^leaguestats/', include('leaguestats.urls')),
     url(r'^rest_api/', include('rest_api.urls')),
     url(r'^admin/', admin.site.urls),
+    url(r'^$', RedirectView.as_view(url='/leaguestats/')),
 ]

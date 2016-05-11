@@ -43,7 +43,7 @@ def retrieve_league_data(league_id):
     league_metadata = scrape_league_data.scrape_league_info(league_id)
     team_data = scrape_league_data.scrape_team_data_from_league_info(league_metadata)
     team_data_df = scrape_league_data.convert_data_to_dataframe(team_data)
-    persist_league_data(league_id, league_metadata, team_data_df)
+    # persist_league_data(league_id, league_metadata, team_data_df)
     
     return team_data_df
 

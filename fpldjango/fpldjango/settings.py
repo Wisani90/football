@@ -85,12 +85,8 @@ WSGI_APPLICATION = 'fpldjango.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'fplproject',
-        'USER': 'ben_fpl',
-        'PASSWORD': 'fplpassword',
-        'HOST': 'localhost',
-        'PORT': '',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
 

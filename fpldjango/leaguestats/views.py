@@ -64,7 +64,11 @@ def byteify(_json):
         return _json
 
 def results(request, league_id):
-    res = get(request.build_absolute_uri(reverse('leaguestatsview', kwargs={'league_id': league_id})))
+    try:
+        res = get(request.build_absolute_uri(
+            reverse('leaguestatsview', kwargs={'league_id': league_id})))
+    except:
+        return render(request, 'leaguestats/oops.html')
     data = res.json()
     data = byteify(data)
 

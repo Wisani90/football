@@ -31,9 +31,11 @@ function drawOPRGraph(opr_data){
           text: 'Rank',
           position: 'outer-middle'
         },
+        tick: { format: d3.format("d") },
         inverted: true,
       },
-    }
+    },
+    
     });
 };
 

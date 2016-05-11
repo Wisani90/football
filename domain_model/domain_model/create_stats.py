@@ -1,4 +1,4 @@
-import pandas as pd
+import math
 
 def order_by_gameweek(df):
     df['indexNumber'] = [int(i.split(' ')[-1]) for i in df.index]
@@ -9,6 +9,7 @@ def order_by_gameweek(df):
 class CreateStats(object):
     def __init__(self, league_data):
         self.league_data = league_data
+        self.league_data.fillna(0, inplace=True)
 
     def cumulative_transfers_made(self):
         ctm_df_select = self.league_data[['GW', 'TM', 'player_name']]
@@ -18,6 +19,7 @@ class CreateStats(object):
         ctm_pivot = ctm_df_select.pivot(index='GW', columns='player_name', values='TM')
         ctm_pivot = order_by_gameweek(ctm_pivot)
         ctm_pivot = ctm_pivot.cumsum()
+        ctm_pivot.fillna(0, inplace=True)
         ctm_list_of_lists = []
         gameweek_list = ['Gameweek']
         for gameweek in ctm_pivot.index:
@@ -33,9 +35,23 @@ class CreateStats(object):
     def gamepoints_by_week(self):
         gpw_df_select = self.league_data[['GW', 'GP', 'player_name']]
         gpw_pivot = gpw_df_select.pivot(index='GW', columns='player_name', values='GP')
+        gpw_average = gpw_df_select[['GW', 'GP']].groupby('GW').mean()
         gpw_pivot = order_by_gameweek(gpw_pivot)
-        gpw_dicts = gpw_pivot.to_dict()
-        return gpw_dicts
+        gpw_pivot.fillna(0, inplace=True)
+        gpw_list_of_lists = []
+        gameweek_list = ['Gameweek']
+        average_list = ['Average']
+        for gameweek in gpw_pivot.index:
+            gameweek_int = int(gameweek.split(' ')[1])
+            gameweek_list.append(gameweek_int)
+            average_list.append(gpw_average.loc[gameweek, 'GP'])
+        gpw_list_of_lists.append(gameweek_list)
+        gpw_list_of_lists.append(average_list)
+        for name in gpw_pivot.columns.values.tolist():
+            name_list = [name]
+            name_list.extend(gpw_pivot[name].tolist())
+            gpw_list_of_lists.append(name_list)
+        return gpw_list_of_lists
 
     def gamepoint_rank(self):
         df = self.league_data
@@ -43,6 +59,7 @@ class CreateStats(object):
         gpr_select = df[['GW', 'gp_rank', 'player_name']]
         gpr_pivot = gpr_select.pivot(index='GW', columns='player_name', values='gp_rank')
         gpr_pivot = order_by_gameweek(gpr_pivot)
+        gpr_pivot.fillna(len(gpr_pivot.columns.values), inplace=True)
         gpr_dicts = gpr_pivot.to_dict()
         return gpr_dicts
 
@@ -50,7 +67,7 @@ class CreateStats(object):
         gp_sort = self.league_data[['GW', 'GP', 'player_name']].sort_values('GP', ascending=False)
         gp_sort.columns = ['Gameweek', 'Points', 'Name']
         gp_sort_top = gp_sort.head(10)
-        gp_sort_bottom = gp_sort.tail(10)
+        gp_sort_bottom = gp_sort.sort_values('Points', ascending=True).head(10)
         top_10 = []
         for row in gp_sort_top.index:
             top_dict = {
@@ -75,10 +92,21 @@ class CreateStats(object):
         df = self.league_data
         df['op_rank'] = df.groupby('GW')['OP'].rank(ascending=False)
         opr_select = df[['GW', 'op_rank', 'player_name']]
+        opr_select['op_rank'] = opr_select['op_rank'].apply(lambda x: int(math.floor(x)))
         opr_pivot = opr_select.pivot(index='GW', columns='player_name', values='op_rank')
         opr_pivot = order_by_gameweek(opr_pivot)
-        opr_dicts = opr_pivot.to_dict()
-        return opr_dicts
+        opr_pivot.fillna(len(opr_pivot.columns.values), inplace=True)
+        opr_list_of_lists = []
+        gameweek_list = ['Gameweek']
+        for gameweek in opr_pivot.index:
+            gameweek_int = int(gameweek.split(' ')[1])
+            gameweek_list.append(gameweek_int)
+        opr_list_of_lists.append(gameweek_list)
+        for name in opr_pivot.columns.values.tolist():
+            name_list = [name]
+            name_list.extend(opr_pivot[name].tolist())
+            opr_list_of_lists.append(name_list)
+        return opr_list_of_lists
 
     def bench_points_top_10(self):
         bp_sort = self.league_data[['GW', 'PB', 'player_name']].sort_values('PB', ascending=False)
@@ -119,6 +147,7 @@ class CreateStats(object):
         tv_select = tv_select[tv_select['player_name'].isin(top_10)]
         tv_pivot = tv_select.pivot(index='GW', columns='player_name', values='TV')
         tv_pivot = order_by_gameweek(tv_pivot)
+        tv_pivot.fillna(100, inplace=True)
         tv_list_of_lists = []
         gameweek_list = ['Gameweek']
         for gameweek in tv_pivot.index:
