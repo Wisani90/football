@@ -1,0 +1,7 @@
+-r domain_model/requirements.txt
+-e domain_model/
+
+Django==1.9.4
+djangorestframework==3.3.3
+requests[security]
+ruamel.yaml
