@@ -1,1 +1,1 @@
-web: gunicorn fpldjango/fpldjango.wsgi
+web: gunicorn fpldjango.wsgi
