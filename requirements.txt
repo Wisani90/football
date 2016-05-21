@@ -8,3 +8,4 @@ pyjade
 cryptography
 cffi
 requests[security]
+gunicorn
