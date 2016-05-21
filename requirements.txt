@@ -9,3 +9,4 @@ cryptography
 cffi
 requests[security]
 gunicorn
+whitenoise
