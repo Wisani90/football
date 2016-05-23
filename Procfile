@@ -1,1 +1,2 @@
-web: gunicorn fpldjango.wsgi
+web: python fpldjango/manage.py runserver "0.0.0.0:$PORT" 
+
