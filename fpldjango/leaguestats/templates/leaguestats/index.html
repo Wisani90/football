@@ -35,9 +35,9 @@
           <div class="inner cover">
             <img src="{% static 'images/Premier_League.png' %}" height="150px">
             <h1 class="cover-heading">Enter Your League Number Below</h1>
-            <form action='/leaguestats/' method='post'>{% csrf_token %}
+            <form action='/leaguestats/' method='post' style="color: #000">{% csrf_token %}
                 {{ form.as_p }}
-                <input class="btn-default" type='submit' value='Submit' />
+                <input class="btn-default" type='submit' value='Submit' style="color: #000" />
             </form>
           </div>
 
