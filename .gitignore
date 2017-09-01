@@ -14,3 +14,7 @@ fpldjango/leaguestats/migrations
 .elasticbeanstalk/*
 !.elasticbeanstalk/*.cfg.yml
 !.elasticbeanstalk/*.global.yml
+
+# python compiled #
+###################
+*.pyc
