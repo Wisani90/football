@@ -1,0 +1,13 @@
+-r domain_model/requirements.txt
+-e domain_model/
+-e fpldjango/
+
+Django==1.9.4
+djangorestframework==3.3.3
+ruamel.yaml
+pyjade
+cryptography
+cffi
+requests[security]
+gunicorn
+whitenoise
